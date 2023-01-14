@@ -1,14 +1,6 @@
 import { useEffect } from "react"
 
 export default function Home() {
-  useEffect(() => {
-    CinetPay.setConfig({
-      apikey: '12912847765bc0db748fdd44.40081707',
-      site_id: 445160,
-      notify_url: ''
-    })
-  })
-
   const clk = () => {
     CinetPay.getCheckout({
       transaction_id: Math.floor(Math.random() * 100000000).toString(),
