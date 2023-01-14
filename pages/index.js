@@ -1,11 +1,27 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import {
+  Card,
+  Grid,
+  Modal,
+  Button,
+  CardMedia,
+  TextField,
+  Typography,
+  CardContent,
+  CardActions,
+  InputAdornment
+} from '@mui/material'
 
-const inter = Inter({ subsets: ['latin'] })
-
+import styles from '../styles/modules/Home.module.scss'
+import { useState } from 'react'
 export default function Home() {
+  const [open, setOpen] = useState(false)
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
   return (
     <>
       <Head>
@@ -14,110 +30,107 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <section className='hero-banner'>
+        <div className='content'>
+          {/* <h1>Lorem Ipsum</h1> */}
+          {/* <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
+            saepe fugit aliquid excepturi molestiae totam. Ratione, optio, quae a explicabo enim
+            laudantium ipsam, quia illo facilis repellendus et nostrum dolores. Praesentium reiciendis
+            id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+          </p> */}
+          <Button variant="contained" size='large' className='btn'>Contactez-nous</Button>
+        </div>
+      </section>
+
       <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+        <section className={styles.about}>
+          <div className={styles.container}>
+            <div className={styles.imageContent}>
+              <Image src={'/about.jpg'} width={500} height={500} />
+            </div>
+            <div className={styles.textContent}>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
+                saepe fugit aliquid excepturi molestiae totam. Ratione, optio, quae a explicabo enim
+                laudantium ipsam, quia illo facilis repellendus et nostrum dolores. Praesentium reiciendis
+                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
+        <section className={styles.donationCategories}>
+          <div className={styles.container}>
+            <div className={styles.item}>
+              <div className={styles.content}>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
+                  saepe fugit aliquid excepturi molestiae totam.
+                </p>
+                <Button variant="contained" onClick={() => setOpen(true)} size='large' className={styles.btn}>Faire un don</Button>
+              </div>
+            </div>
+            <div className={styles.item}>
+              <div className={styles.content}>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
+                  saepe fugit aliquid excepturi molestiae totam.
+                </p>
+                <Button variant="contained" onClick={() => setOpen(true)} size='large' className={styles.btn}>Faire un don</Button>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
+        </section>
       </main>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        className='containerPaymentModal'
+      >
+        <Card className='paymentModal'>
+          <CardMedia
+            sx={{ height: 140 }}
+            image="/about.jpg"
+            title="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h4" component="div" className={styles.title}>
+              Don 1
+            </Typography>
+
+            <Grid container spacing={1} alignItems='center' justifyContent='center' >
+              <Grid item xs={12}>
+                <TextField label="Non" size='small' fullWidth variant="outlined" />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField label="Prenom(s)" size='small' fullWidth variant="outlined" />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField 
+                  label="Montant" 
+                  size='small' 
+                  fullWidth 
+                  type='number' 
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">FCFA</InputAdornment>,
+                  }}
+                  variant="outlined" 
+                />
+              </Grid>
+            </Grid>
+          </CardContent>
+          <CardActions>
+            <Button variant="contained" size='large' fullWidth className='btn'>Payez</Button>
+          </CardActions>
+        </Card>
+      </Modal>
     </>
   )
 }
