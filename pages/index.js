@@ -39,7 +39,7 @@ export default function Home() {
 
       <section className='hero-banner'>
         <div className='content'>
-          <Button variant="contained" size='large' className='btn'>Faire un don</Button>
+          <Button variant="contained" onClick={() => setOpen(true)} size='large' className='btn'>Faire un don</Button>
         </div>
       </section>
 
