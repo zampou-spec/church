@@ -1,7 +1,9 @@
 import '../styles/globals.scss'
+
+import Head from 'next/head'
 import Image from 'next/image'
 import { Button } from '@mui/material'
-import Head from 'next/head'
+import Link from 'next/link'
 
 export default function App({ Component, pageProps }) {
   return <>
@@ -11,7 +13,9 @@ export default function App({ Component, pageProps }) {
 
     <header className='navbar'>
       <nav>
-        <Image src={'/logo.png'} className='logo' width={500} height={500} />
+        <Link href='/'>
+          <Image src={'/logo.png'} className='logo' width={500} height={500} />
+        </Link>
         <Button variant="contained" size='large' className='btn'>Contactez-nous</Button>
       </nav>
     </header>

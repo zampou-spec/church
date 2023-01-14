@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/modules/Requirement.module.scss'
-import { Button, Modal, Card, CardActions, CardContent, CardMedia, Typography, LinearProgress } from '@mui/material'
+import { Button, Modal, Card, CardActions, CardContent, CardMedia, Typography, LinearProgress, Paper } from '@mui/material'
 
 export default function Home() {
   return (
@@ -14,11 +14,20 @@ export default function Home() {
       </Head>
       <section className={styles.heroBanner}>
         <div className={styles.content}>
-          <h1>Lorem Ipsum</h1>
+          <h1>Nos besoins</h1>
         </div>
       </section>
 
       <main className={styles.main}>
+        <section className={styles.topText}>
+          <div className={styles.container}>
+            <Paper elevation={3} className={styles.paper}>
+              <p>
+                Nous avons listé nos besoins en matériels sur cette plateforme pour permettre aux personnes de bonne volonté de nous aider. Vous pouvez selon l'objectif, decider d'offrir du matériel directement à la paroisse en prenant rendez-vous ou decider de payer une somme pour combler l'un des besoins lister ici.
+              </p>
+            </Paper> 
+          </div>
+        </section>
         <section className={styles.cardContentGrid}>
           <div className={styles.container} >
             <Card className={styles.needCard}>
@@ -35,7 +44,7 @@ export default function Home() {
                   <div className={styles.goal}>
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Objectif:
+                        Atteint: 
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -46,7 +55,7 @@ export default function Home() {
 
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Atteint:
+                        Objectif:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -56,7 +65,7 @@ export default function Home() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size='large' fullWidth className='btn'>Faire un don</Button>
+                <Button variant="contained" size='large' fullWidth className='btn'>Contribuer</Button>
               </CardActions>
             </Card>
             <Card className={styles.needCard}>
@@ -67,13 +76,13 @@ export default function Home() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div" className={styles.title}>
-                  Ciment
+                  Sable
                 </Typography>
                 <div className={styles.goalContent}>
                   <div className={styles.goal}>
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Objectif:
+                        Atteint:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -84,7 +93,7 @@ export default function Home() {
 
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Atteint:
+                        Objectif:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -94,7 +103,7 @@ export default function Home() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size='large' fullWidth className='btn'>Faire un don</Button>
+                <Button variant="contained" size='large' fullWidth className='btn'>Contribuer</Button>
               </CardActions>
             </Card>
             <Card className={styles.needCard}>
@@ -105,13 +114,13 @@ export default function Home() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div" className={styles.title}>
-                  Botte de fer
+                  Sable
                 </Typography>
                 <div className={styles.goalContent}>
                   <div className={styles.goal}>
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Objectif:
+                        Atteint:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -122,7 +131,7 @@ export default function Home() {
 
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Atteint:
+                        Objectif:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
                         100,000,000 FCFA
@@ -132,7 +141,7 @@ export default function Home() {
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size='large' fullWidth className='btn'>Faire un don</Button>
+                <Button variant="contained" size='large' fullWidth className='btn'>Contribuer</Button>
               </CardActions>
             </Card>
             <Card className={styles.needCard}>
@@ -143,33 +152,34 @@ export default function Home() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div" className={styles.title}>
-                  Gravier
+                  Sable
                 </Typography>
                 <div className={styles.goalContent}>
                   <div className={styles.goal}>
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Objectif:
-                      </Typography>
-                      <Typography gutterBottom className={styles.value}>
-                        10000 FCFA
-                      </Typography>
-                    </div>
-
-                    <div className={styles.item}>
-                      <Typography gutterBottom variant="h6" component="div" className={styles.title}>
                         Atteint:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
-                        1000 FCFA
+                        100,000,000 FCFA
+                      </Typography>
+                    </div>
+
+                    <LinearProgress variant="determinate" className={styles.progress} value={10} />
+
+                    <div className={styles.item}>
+                      <Typography gutterBottom variant="h6" component="div" className={styles.title}>
+                        Objectif:
+                      </Typography>
+                      <Typography gutterBottom className={styles.value}>
+                        100,000,000 FCFA
                       </Typography>
                     </div>
                   </div>
-                  <LinearProgress variant="determinate" className={styles.progress} value={10} />
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size='large' fullWidth className='btn'>Faire un don</Button>
+                <Button variant="contained" size='large' fullWidth className='btn'>Contribuer</Button>
               </CardActions>
             </Card>
             <Card className={styles.needCard}>
@@ -180,33 +190,34 @@ export default function Home() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h4" component="div" className={styles.title}>
-                  Gravier
+                  Sable
                 </Typography>
                 <div className={styles.goalContent}>
                   <div className={styles.goal}>
                     <div className={styles.item}>
                       <Typography gutterBottom variant="h6" component="div" className={styles.title}>
-                        Objectif:
-                      </Typography>
-                      <Typography gutterBottom className={styles.value}>
-                        10000 FCFA
-                      </Typography>
-                    </div>
-
-                    <div className={styles.item}>
-                      <Typography gutterBottom variant="h6" component="div" className={styles.title}>
                         Atteint:
                       </Typography>
                       <Typography gutterBottom className={styles.value}>
-                        1000 FCFA
+                        100,000,000 FCFA
+                      </Typography>
+                    </div>
+
+                    <LinearProgress variant="determinate" className={styles.progress} value={10} />
+
+                    <div className={styles.item}>
+                      <Typography gutterBottom variant="h6" component="div" className={styles.title}>
+                        Objectif:
+                      </Typography>
+                      <Typography gutterBottom className={styles.value}>
+                        100,000,000 FCFA
                       </Typography>
                     </div>
                   </div>
-                  <LinearProgress variant="determinate" className={styles.progress} value={10} />
                 </div>
               </CardContent>
               <CardActions>
-                <Button variant="contained" size='large' fullWidth className='btn'>Faire un don</Button>
+                <Button variant="contained" size='large' fullWidth className='btn'>Contribuer</Button>
               </CardActions>
             </Card>
           </div>

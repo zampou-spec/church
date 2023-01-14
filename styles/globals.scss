@@ -32,7 +32,7 @@ body {
   position: fixed;
   width: 100%;
 
-  z-index: 9999;
+  z-index: 1000;
 
   nav {
     display: flex;
@@ -54,11 +54,26 @@ body {
       padding: 0 10px;
     }
 
+    @media (max-width: 320px) {
+      height: 60px;
+    }
+
     .logo {
       margin-top: 2px;
       z-index: 200;
       width: 200px;
       height: 100px;
+
+      @media (max-width: 320px) {
+        width: 150px;
+        height: 75px;
+      }
+    }
+
+    .btn {
+      @media (max-width: 375px) {
+        font-size: 10px;
+      }
     }
   }
 }
@@ -94,8 +109,12 @@ body {
     }
 
     .btn {
-      margin-top:  300px;
+      margin-top: 300px;
       margin-left: 200px;
+
+      @media (max-width: 425px) {
+        margin: unset;
+      }
     }
   }
 }
@@ -201,7 +220,23 @@ body {
   justify-content: center;
 
   .paymentModal {
+  position: relative;
     width: 100%;
     max-width: 450px;
+
+    .closeModal {
+      position: absolute;
+      padding: 5px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1565c0;
+        box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import { useState } from 'react'
 import {
   Card,
   Grid,
@@ -10,11 +11,16 @@ import {
   Typography,
   CardContent,
   CardActions,
-  InputAdornment
+  InputAdornment,
+  IconButton
 } from '@mui/material'
-
 import styles from '../styles/modules/Home.module.scss'
-import { useState } from 'react'
+
+// Import Swiper styles
+import 'swiper/css'
+import { Autoplay } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
 export default function Home() {
   const [open, setOpen] = useState(false)
 
@@ -30,16 +36,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <section className='hero-banner'>
         <div className='content'>
-          {/* <h1>Lorem Ipsum</h1> */}
-          {/* <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
-            saepe fugit aliquid excepturi molestiae totam. Ratione, optio, quae a explicabo enim
-            laudantium ipsam, quia illo facilis repellendus et nostrum dolores. Praesentium reiciendis
-            id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
-          </p> */}
-          <Button variant="contained" size='large' className='btn'>Contactez-nous</Button>
+          <Button variant="contained" size='large' className='btn'>Faire un don</Button>
         </div>
       </section>
 
@@ -51,16 +51,25 @@ export default function Home() {
             </div>
             <div className={styles.textContent}>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
-                saepe fugit aliquid excepturi molestiae totam. Ratione, optio, quae a explicabo enim
-                laudantium ipsam, quia illo facilis repellendus et nostrum dolores. Praesentium reiciendis
-                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
-                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
-                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
-                id officiis mollitia eaque eveniet! Nemo, doloribus! Quidem suscipit.
+                La création d’une paroisse, si elle répond à un besoin d’ordre pastoral,
+                celui de rapprocher davantage l’église de ses fidèles, nécessite au préalable
+                que l’on puisse avoir les infrastructures humaines et matérielles capables de
+                permettre le bon fonctionnement de cette paroisse. C'est dans cette optique
+                que la nouvelle paroisse Notre-Dame de Cana de Jean folly belle-ville organise
+                sa 2e édition de La fête de Charité du 15 janvier au 15 mars 2023. En organisant
+                cette fête qui a  pour objectif de recueillir des fonds pour la construction de
+                la paroisse, l'administrateur général et la communauté paroissiale exhortent les
+                fidèles et les personnes de bonne volonté à participer à travers des dons en nature
+                ou en espèces.
               </p>
             </div>
           </div>
+        </section>
+
+        <section className={styles.textPresentation}>
+          <p>
+            Comptant sur votre détermination, cette plateforme de collecte de fonds a été mis en place pour que ce défi soit relevé.
+          </p>
         </section>
 
         <section className={styles.donationCategories}>
@@ -68,41 +77,98 @@ export default function Home() {
             <div className={styles.item}>
               <div className={styles.content}>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
-                  saepe fugit aliquid excepturi molestiae totam.
+                  Contribuer à la construction de l'église par un don non fixe. 
+                  Donnez ce que vous pouvez, aussi petit soit-elle votre contribution 
+                  sera pour l'oeuvre de Dieu.
                 </p>
                 <Button variant="contained" onClick={() => setOpen(true)} size='large' className={styles.btn}>Faire un don</Button>
               </div>
             </div>
             <div className={styles.item}>
-              <div className={styles.content}>
+              <div className={`${styles.content} gg`}>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, dolor dolores! Assumenda
-                  saepe fugit aliquid excepturi molestiae totam.
+                  Decider de combler par votre contribuer un besoin en matériels de construction. 
+                  Consulter notre liste de besoin fixe, offrez ou payez pour la construction de l'église.
                 </p>
-                <Button variant="contained" onClick={() => setOpen(true)} size='large' className={styles.btn}>Faire un don</Button>
+                <Button variant="contained" href='/needed' size='large' className={styles.btn}>Combler un besoin</Button>
               </div>
             </div>
           </div>
+        </section>
+
+        <section className={styles.worksite}>
+          <div className={styles.container}>
+            <h4>Notre chantier</h4>
+          </div>
+          <Swiper
+            spaceBetween={30}
+            slidesPerView={3}
+            autoplay={{ delay: 1000 }}
+            modules={[Autoplay]}
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 20
+              },
+              425: {
+                slidesPerView: 2,
+                spaceBetween: 20
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 40
+              }
+            }}
+          >
+            <SwiperSlide>
+              <Image src={'/sliders/1.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/2.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/3.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/4.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/5.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/6.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/7.jpg'} width={500} height={500} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Image src={'/sliders/8.jpg'} width={500} height={500} />
+            </SwiperSlide>
+          </Swiper>
         </section>
       </main>
 
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
         className='containerPaymentModal'
       >
         <Card className='paymentModal'>
+          <div className='closeModal' onClick={handleClose}>
+            <Image src={'/close.svg'} width={500} height={500} />
+          </div>
           <CardMedia
-            sx={{ height: 140 }}
-            image="/about.jpg"
+            sx={{ height: 200 }}
+            image="/form.jpg"
             title="green iguana"
           />
           <CardContent>
-            <Typography gutterBottom variant="h4" component="div" className={styles.title}>
-              Don 1
+            <Typography gutterBottom variant="h4" component="div" className={styles.title} style={{ textAlign: 'center'}}>
+              Faire un don
             </Typography>
 
             <Grid container spacing={1} alignItems='center' justifyContent='center' >
@@ -113,15 +179,15 @@ export default function Home() {
                 <TextField label="Prenom(s)" size='small' fullWidth variant="outlined" />
               </Grid>
               <Grid item xs={12}>
-                <TextField 
-                  label="Montant" 
-                  size='small' 
-                  fullWidth 
-                  type='number' 
+                <TextField
+                  label="Montant"
+                  size='small'
+                  fullWidth
+                  type='number'
                   InputProps={{
                     endAdornment: <InputAdornment position="end">FCFA</InputAdornment>,
                   }}
-                  variant="outlined" 
+                  variant="outlined"
                 />
               </Grid>
             </Grid>

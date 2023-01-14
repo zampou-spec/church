@@ -28,6 +28,7 @@
       }
 
       @media (max-width: 425px) {
+        padding: 15px;
         flex-direction: column;
       }
 
@@ -57,33 +58,72 @@
     }
   }
 
+  .textPresentation {
+    color: var(--white);
+    background-color: #158c32;
+    height: 70px;
+    text-align: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 30px;
+
+    @media (max-width: 425px) {
+      height: 100px;
+    }
+
+    @media (max-width: 320px) {
+      height: 150px;
+    }
+
+    p {
+      font-size: 18px;
+
+      @media (max-width: 425px) {
+        font-size: 16px;
+      }
+    }
+  }
+
   .donationCategories {
     margin-bottom: 50px;
 
     .container {
       display: flex;
 
-      @media (max-width: 425px) {
-        flex-direction: column;
-      }
-
       @media (max-width: 1024px) {
         padding: 0 30px;
       }
 
+      @media (max-width: 425px) {
+        padding: 0 15px;
+        flex-direction: column;
+      }
+
       .item {
-        background: url('/hero.jpg');
-        background-size: cover;
+        background-size: contain;
         color: var(--white);
 
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
 
         &:nth-child(1) {
-          background: url('/hero.jpg');
+          border-right: #158c32 solid 3px;
+          background: url('/needed-1.jpg') #fff;
+
+          @media (max-width: 425px) {
+            border-right: unset;
+            border-bottom: #158c32 solid 4px;
+          }
         }
 
         &:nth-child(2) {
-          background: url('/about.jpg');
+          background: url('/needed-2.jpg') #fff;
         }
+
 
         .content {
           display: flex;
@@ -94,6 +134,11 @@
           height: 300px;
           background: var(--primary-opacity);
           padding: 50px;
+
+          @media (max-width: 768px) {
+            padding: 50px 20px;
+            flex-direction: column;
+          }
 
           p {
             text-align: center;
@@ -117,5 +162,18 @@
         }
       }
     }
+  }
+
+  .worksite  {
+    .container {
+      padding: 0 20px;
+
+      h4 {
+        margin: 10px 0;
+        font-weight: 500;
+        font-size: 25px;
+      }
+    }
+
   }
 }

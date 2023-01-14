@@ -35,6 +35,30 @@
 }
 
 .main {
+  .topText {
+    .container {
+      margin: 15px auto;
+
+      @media (max-width: 1024px) {
+        padding: 0 18px;
+      }
+
+      .paper {
+        padding: 10px 30px;
+
+        @media (max-width: 425px) {
+          padding: 15px;
+        }
+
+        p {
+          text-align: 'center';
+          font-weight: 500;
+          color: #010101;
+        }
+      }
+    }
+  }
+
   .cardContentGrid {
     .container {
       display: grid;
