@@ -12,7 +12,10 @@
 }
 
 .heroBanner {
-  background: url('/hero.jpg');
+  background: url('/sliders/7.jpg');
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: center;
 
   .content {
     display: flex;

@@ -58,6 +58,10 @@ body {
       height: 60px;
     }
 
+    @media (min-width: 491px) {
+      padding: 0 9px;
+    }
+
     .logo {
       margin-top: 2px;
       z-index: 200;
@@ -77,6 +81,14 @@ body {
 
       @media (max-width: 375px) {
         font-size: 10px;
+      }
+
+      @media (max-width: 491px) {
+        font-size: 10px;
+      }
+
+      @media (max-width: 435px) {
+        font-size: 9px;
       }
     }
   }

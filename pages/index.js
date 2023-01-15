@@ -64,10 +64,11 @@ export default function Home() {
       })
 
       CinetPay.waitResponse(async (data) => {
-        if (data.status == "REFUSED") {
-          router.push('/thank-you?satus=fail')
-        } else if (data.status == "ACCEPTED") {
-          router.push(`/thank-you?satus=success&fullname=${values.first_name + ' ' + values.last_name}`)
+        if (data.status == 'REFUSED') {
+          router.push('/thank-you?status=fail')
+        } else if (data.status == 'ACCEPTED') {
+          const fullname = values.first_name + ' ' + values.last_name;
+          router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
         }
       })
 

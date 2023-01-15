@@ -9,27 +9,8 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import LoadingButton from '@mui/lab/LoadingButton'
-import {
-  TabList,
-  TabPanel,
-  TabContext
-} from '@mui/lab'
-import {
-  Tab,
-  Box,
-  Grid,
-  Card,
-  Modal,
-  Paper,
-  Button,
-  CardMedia,
-  TextField,
-  Typography,
-  CardContent,
-  CardActions,
-  LinearProgress,
-  InputAdornment,
-} from '@mui/material'
+import { TabList, TabPanel, TabContext } from '@mui/lab'
+import { Tab, Box, Grid, Card, Modal, Paper, Button, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
 
 const getNeeded = async () => axios.get('/api/needed').then((res) => res.data).catch(console.log)
 
@@ -40,7 +21,7 @@ export default function Home() {
 
   const { data: neededs, isLoading, mutate } = useSWR('/api/needed', getNeeded)
 
-  const formikMoney= useFormik({
+  const formikMoney = useFormik({
     initialValues: {
       first_name: '',
       last_name: '',
@@ -92,15 +73,12 @@ export default function Home() {
       })
 
       CinetPay.waitResponse(async (data) => {
-        if (data.status == "REFUSED") {
-          router.push('/thank-you?satus=fail')
-        } else if (data.status == "ACCEPTED") {
-          await axios
-            .post('/api/needed', { amount: values.amount, needed_id: values.need_id })
-            .then(() => {
-              mutate()
-              router.push(`/thank-you?satus=success&fullname=${values.first_name + ' ' + values.last_name}`)
-            })
+        if (data.status == 'REFUSED') {
+          router.push('/thank-you?status=fail')
+        } else if (data.status == 'ACCEPTED') {
+          mutate()
+          const fullname = values.first_name + ' ' + values.last_name;
+          router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
         }
       })
 
@@ -161,7 +139,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+
       <section className={styles.heroBanner}>
         <div className={styles.content}>
           <h1>Nos besoins</h1>
@@ -235,7 +213,7 @@ export default function Home() {
           <TabContext value={panel}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handlePanel} variant='fullWidth'>
-                <Tab label="CONTRIBUTION EN ESPECE" value="1"  sx={{ fontFamily: 'Poppins', fontSize: '13px' }} />
+                <Tab label="CONTRIBUTION EN ESPECE" value="1" sx={{ fontFamily: 'Poppins', fontSize: '13px' }} />
                 <Tab label="CONTRIBUTION EN MATERIEL" value="2" sx={{ fontFamily: 'Poppins', fontSize: '13px' }} />
               </TabList>
             </Box>

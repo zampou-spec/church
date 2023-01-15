@@ -1,6 +1,9 @@
 import styles from '../styles/modules/ThankYou.module.scss'
 
 import Head from 'next/head'
+import Image from 'next/image'
+import JSConfetti from 'js-confetti'
+import { useRouter } from 'next/router'
 import {
   Tab,
   Box,
@@ -18,7 +21,126 @@ import {
   InputAdornment,
 } from '@mui/material'
 
-export default function Home() {
+import Particles from 'react-particles'
+import { loadFull } from 'tsparticles'
+import { useEffect, useCallback } from 'react'
+
+export default function ThankYou() {
+  const { query } = useRouter()
+
+  const customInit = useCallback(async (engine) => {
+    await loadFull(engine)
+  })
+
+  const options = {
+    "fullScreen": {
+      "zIndex": 999999
+    },
+    "particles": {
+      "color": {
+        "value": [
+          '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
+        ],
+      },
+      "move": {
+        "direction": "bottom",
+        "enable": true,
+        "outModes": {
+          "default": "out"
+        },
+        "size": true,
+        "speed": {
+          "min": 1,
+          "max": 3
+        }
+      },
+      "number": {
+        "value": 500,
+        "density": {
+          "enable": true,
+          "area": 800
+        }
+      },
+      "opacity": {
+        "value": 1,
+        "animation": {
+          "enable": false,
+          "startValue": "max",
+          "destroy": "min",
+          "speed": 0.3,
+          "sync": true
+        }
+      },
+      "rotate": {
+        "value": {
+          "min": 0,
+          "max": 360
+        },
+        "direction": "random",
+        "move": true,
+        "animation": {
+          "enable": true,
+          "speed": 60
+        }
+      },
+      "tilt": {
+        "direction": "random",
+        "enable": true,
+        "move": true,
+        "value": {
+          "min": 0,
+          "max": 360
+        },
+        "animation": {
+          "enable": true,
+          "speed": 60
+        }
+      },
+      "shape": {
+        "type": [
+          "circle",
+          "square"
+        ],
+        "options": {}
+      },
+      "size": {
+        "value": {
+          "min": 5,
+          "max": 10
+        }
+      },
+      "roll": {
+        "darken": {
+          "enable": true,
+          "value": 30
+        },
+        "enlighten": {
+          "enable": true,
+          "value": 30
+        },
+        "enable": true,
+        "speed": {
+          "min": 15,
+          "max": 25
+        }
+      },
+      "wobble": {
+        "distance": 30,
+        "enable": true,
+        "move": true,
+        "speed": {
+          "min": -15,
+          "max": 15
+        }
+      }
+    }
+  }
+
+  useEffect(() => {
+    const jsConfetti = new JSConfetti()
+    jsConfetti.addConfetti({confettiColors: ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7']})
+  })
+
   return (
     <>
       <Head>
@@ -28,14 +150,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <section className={styles.heroBanner}>
+      <Particles options={options} init={customInit} />
+
+      <section className={styles.heroBanner} style={{ background: query.status =='success' ? '#198754' : '#dc3545' }}>
         <div className={styles.content}>
-          <h1>Nos besoins</h1>
+          {query.status == 'success' ?
+            <div className={styles.textContent}>
+                <h1>Felicitation</h1>
+                <h5>{ query.fullname }</h5>
+              </div>
+            : <h1>Ooops erruer</h1>
+          }
         </div>
       </section>
 
       <main className={styles.main}>
-        <h1>OKKK</h1>
+        <section className={styles.thankYou}>
+          <div className={styles.container}>
+            <div className={styles.textContent}>
+              {query.status == 'success' ?
+                <h3>L'église vous remercie pour votre don</h3>
+                : <h3>Une erreur s'est produite lors du don veuillez ressayer plus tard</h3>
+              }
+            </div>
+            <div className={styles.imageContent}>
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
+            </div>
+          </div>
+        </section>
       </main>
     </>
   )
