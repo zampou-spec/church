@@ -4,26 +4,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import JSConfetti from 'js-confetti'
 import { useRouter } from 'next/router'
-import {
-  Tab,
-  Box,
-  Grid,
-  Card,
-  Modal,
-  Paper,
-  Button,
-  CardMedia,
-  TextField,
-  Typography,
-  CardContent,
-  CardActions,
-  LinearProgress,
-  InputAdornment,
-} from '@mui/material'
 
 import Particles from 'react-particles'
 import { loadFull } from 'tsparticles'
 import { useEffect, useCallback } from 'react'
+import { useSelect } from '@mui/base'
 
 export default function ThankYou() {
   const { query } = useRouter()
@@ -32,15 +17,15 @@ export default function ThankYou() {
     await loadFull(engine)
   })
 
+  const color = query.status == 'success' ? ['#0aff3f', '#47ff5f', '#72ff70', '#85ffb6', '#b1fbb6', '#bef9c5'] : ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7'] 
+
   const options = {
     "fullScreen": {
       "zIndex": 999999
     },
     "particles": {
       "color": {
-        "value": [
-          '#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7',
-        ],
+        "value": color,
       },
       "move": {
         "direction": "bottom",
@@ -138,7 +123,7 @@ export default function ThankYou() {
 
   useEffect(() => {
     const jsConfetti = new JSConfetti()
-    jsConfetti.addConfetti({confettiColors: ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7']})
+    jsConfetti.addConfetti({confettiColors: color})
   })
 
   return (

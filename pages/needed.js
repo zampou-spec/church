@@ -76,9 +76,14 @@ export default function Home() {
         if (data.status == 'REFUSED') {
           router.push('/thank-you?status=fail')
         } else if (data.status == 'ACCEPTED') {
-          mutate()
-          const fullname = values.first_name + ' ' + values.last_name;
-          router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
+          await axios
+            .post('/api/needed', { needed_id: values.need_id, amount: values.amount })
+            .then(() => {
+              mutate()
+              const fullname = values.first_name + ' ' + values.last_name
+              router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
+            })
+            .catch(console.error)
         }
       })
 
@@ -108,9 +113,16 @@ export default function Home() {
     }),
     onSubmit: async (values, helpers) => {
       setOpen(false)
-      helpers.resetForm()
 
-      router.push(`/thank-you?satus=success&fullname=${values.first_name + ' ' + values.last_name}`)
+      await axios
+        .post('/api/send-contact-mail', values)
+        .then(() => {
+          const fullname = values.first_name + ' ' + values.last_name
+          router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
+        })
+        .catch(console.error)
+
+      helpers.resetForm()
     }
   })
 
@@ -159,8 +171,8 @@ export default function Home() {
         <section className={styles.cardContentGrid}>
           <div className={styles.container}>
             {isLoading ?
-              [1, 2, 3].map(() =>
-                <Card className={styles.needCard}>
+              [1, 2, 3].map((i) =>
+                <Card className={styles.needCard} key={i}>
                   <CardMedia sx={{ height: 140, overflow: 'hidden' }}>
                     <Skeleton height='250px' sx={{ marginTop: '-60px' }} />
                   </CardMedia>

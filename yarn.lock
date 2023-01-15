@@ -807,6 +807,11 @@ next@13.1.1:
     "@next/swc-win32-ia32-msvc" "13.1.1"
     "@next/swc-win32-x64-msvc" "13.1.1"
 
+nodemailer@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.9.0.tgz#a17488ff470ff9edf1bb31d9ec23079bc94f7dd3"
+  integrity sha512-jFaCEGTeT3E/m/5R2MHWiyQH3pSARECRUDM+1hokOYc3lQAAG7ASuy+2jIsYVf+RVa9zePopSQwKNVFH8DKUpA==
+
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"

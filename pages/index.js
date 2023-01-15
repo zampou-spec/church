@@ -7,12 +7,13 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Autoplay } from 'swiper'
 import { useFormik } from 'formik'
-import JSConfetti from 'js-confetti'
+import { useRouter } from 'next/router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { Card, Grid, Modal, Button, CardMedia, TextField, Typography, CardContent, CardActions, InputAdornment } from '@mui/material'
 
 export default function Home() {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
 
   const formik = useFormik({
@@ -67,7 +68,7 @@ export default function Home() {
         if (data.status == 'REFUSED') {
           router.push('/thank-you?status=fail')
         } else if (data.status == 'ACCEPTED') {
-          const fullname = values.first_name + ' ' + values.last_name;
+          const fullname = values.first_name + ' ' + values.last_name
           router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
         }
       })
