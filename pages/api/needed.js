@@ -14,7 +14,7 @@ export default async (req, res) => {
       //   needed.percent = percent > 100 ? 100 : percent
       // }
 
-      return res.status(200).json(needed)
+      res.status(200).json(needed)
     }
 
   //   if (req.method == 'POST') {
