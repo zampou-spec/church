@@ -68,7 +68,7 @@ export default function Home() {
     }),
     onSubmit: async (values, helpers) => {
       setOpen(false)
-      
+
       CinetPay.getCheckout({
         transaction_id: Math.floor(Math.random() * 100000000).toString(),
         amount: values.amount,
