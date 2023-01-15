@@ -10,7 +10,7 @@ import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { TabList, TabPanel, TabContext } from '@mui/lab'
-import { Tab, Box, Grid, Card, Modal, Paper, Button, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
+import { Tab, Box, Grid, Card, Modal, Paper, Button, Skeleton, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
 
 const getNeeded = async () => axios.get('/api/needed').then((res) => res.data).catch(console.log)
 
@@ -159,8 +159,27 @@ export default function Home() {
         <section className={styles.cardContentGrid}>
           <div className={styles.container}>
             {isLoading ?
-              <div style={{ opacity: 0 }}>Loading ...</div>
-              : neededs?.map((needed) =>
+              [1, 2, 3].map(() =>
+                <Card className={styles.needCard}>
+                  <CardMedia sx={{ height: 140, overflow: 'hidden' }}>
+                    <Skeleton height='250px' sx={{ marginTop: '-60px' }} />
+                  </CardMedia>
+                  <CardContent sx={{ paddingBottom: 0 }}>
+                    <Typography gutterBottom variant="h4" component="div" className={styles.title}>
+                      <Skeleton />
+                    </Typography>
+                    <div className={styles.goalContent}>
+                      <div className={styles.goal}>
+                        <Skeleton />
+                        <Skeleton />
+                      </div>
+                    </div>
+                  </CardContent>
+                  <CardActions>
+                    <Skeleton width={'100%'} height={'72px'} sx={{ marginBottom: '-16px', marginTop: '-3px' }} />
+                  </CardActions>
+                </Card>
+              ) : neededs?.map((needed) =>
                 <Card className={styles.needCard} key={needed.id}>
                   <CardMedia
                     sx={{ height: 140 }}
@@ -181,9 +200,7 @@ export default function Home() {
                             {needed.reached} FCFA
                           </Typography>
                         </div>
-
                         <LinearProgress variant="determinate" className={styles.progress} value={needed.percent} />
-
                         <div className={styles.item}>
                           <Typography gutterBottom variant="h6" component="div" className={styles.title}>
                             Objectif:
