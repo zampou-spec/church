@@ -7,10 +7,16 @@ datasource db {
   url      = "postgresql://postgres:UQt2RMPPXqa1VJvG@db.qxcwtuhrziivunhvukif.supabase.co:5432/postgres"
 }
 
+// datasource db {
+//   provider = "sqlite"
+//   url      = "file:./dev.db"
+// }
+
 model Needed {
   id String @id @default(cuid())
   name String
   image String
   goal Decimal
   reached Decimal
+  created_at DateTime @default(now())
 }

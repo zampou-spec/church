@@ -4,5 +4,6 @@ CREATE TABLE "Needed" (
     "name" TEXT NOT NULL,
     "image" TEXT NOT NULL,
     "goal" DECIMAL NOT NULL,
-    "reached" DECIMAL NOT NULL
+    "reached" DECIMAL NOT NULL,
+    "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

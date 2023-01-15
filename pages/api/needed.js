@@ -5,14 +5,14 @@ const prisma = new PrismaClient()
 export default async (req, res) => {
 
   if (req.method == 'GET') {
-    const neededs = await prisma.needed.findMany()
+    const neededs = await prisma.needed.findMany({ orderBy: [{ created_at: 'DESC' }] })
 
     for (const needed of neededs) {
       const percent = (needed.reached / needed.goal) * 100
       needed.percent = percent > 100 ? 100 : percent
     }
 
-    res.status(200).json(neededs)
+    return res.status(200).json(neededs)
   }
 
   if (req.method == 'POST') {
@@ -24,5 +24,5 @@ export default async (req, res) => {
     return res.status(200).json(updateNeeded)
   }
 
-  res.status(405).json({ message: 'Method not allowed' })
+  return res.status(405).json({ message: 'Method not allowed' })
 }
