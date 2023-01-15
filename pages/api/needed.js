@@ -1,19 +1,20 @@
 import { PrismaClient } from '@prisma/client'
 
+const prisma = new PrismaClient()
+
 export default async (req, res) => {
-  const prisma = new PrismaClient()
 
   try {
     if (req.method == 'GET') {
-      // const neededs = await prisma.needed.findMany()
-      const neededs = {}
+      const neededs = await prisma.needed.findMany()
+      const needed = {}
 
       // for (const needed of neededs) {
       //   const percent = (needed.reached / needed.goal) * 100
       //   needed.percent = percent > 100 ? 100 : percent
       // }
 
-      return res.status(200).json(neededs)
+      return res.status(200).json(needed)
     }
 
     if (req.method == 'POST') {
