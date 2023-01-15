@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 export default async (req, res) => {
 
   if (req.method == 'GET') {
-    const neededs = await prisma.needed.findMany({ orderBy: [{ created_at: 'DESC' }] })
+    const neededs = await prisma.needed.findMany()
 
     for (const needed of neededs) {
       const percent = (needed.reached / needed.goal) * 100
