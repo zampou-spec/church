@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx prisma db seed && next build",
+    "lint": "next lint",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "vercel-build": "prisma generate && prisma migrate deploy && npx prisma db seed && next build"
   },
   "prisma": {
     "seed": "node prisma/seed.js"

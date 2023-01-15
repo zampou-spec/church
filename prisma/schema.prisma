@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:../../../prisma/database.db"
+  provider = "postgresql"
+  url      = "postgresql://postgres:UQt2RMPPXqa1VJvG@db.qxcwtuhrziivunhvukif.supabase.co:5432/postgres"
 }
 
 model Needed {

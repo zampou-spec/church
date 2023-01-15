@@ -4,30 +4,25 @@ const prisma = new PrismaClient()
 
 export default async (req, res) => {
 
-  // try {
-    if (req.method == 'GET') {
-      const neededs = await prisma.needed.findMany()
-      const needed = {}
+  if (req.method == 'GET') {
+    const neededs = await prisma.needed.findMany()
 
-      // for (const needed of neededs) {
-      //   const percent = (needed.reached / needed.goal) * 100
-      //   needed.percent = percent > 100 ? 100 : percent
-      // }
-
-      res.status(200).json(needed)
+    for (const needed of neededs) {
+      const percent = (needed.reached / needed.goal) * 100
+      needed.percent = percent > 100 ? 100 : percent
     }
 
-  //   if (req.method == 'POST') {
-  //     const { needed_id, amount } = req.body
+    res.status(200).json(neededs)
+  }
 
-  //     const { reached } = await prisma.needed.findFirst({ where: { id: needed_id }, select: { reached: true } })
-  //     const updateNeeded = await prisma.needed.update(({ where: { id: needed_id }, data: { reached: parseFloat(reached) + parseFloat(amount) } }))
+  if (req.method == 'POST') {
+    const { needed_id, amount } = req.body
 
-  //     return res.status(200).json(updateNeeded)
-  //   }
-  // } catch (error) {
-  //   res.status(500).json({ status: 'error', data: error?.message || error || 'Something went wrong' })
-  // }
+    const { reached } = await prisma.needed.findFirst({ where: { id: needed_id }, select: { reached: true } })
+    const updateNeeded = await prisma.needed.update(({ where: { id: needed_id }, data: { reached: parseFloat(reached) + parseFloat(amount) } }))
 
-  // res.status(405).json({ message: 'Method not allowed' })
+    return res.status(200).json(updateNeeded)
+  }
+
+  res.status(405).json({ message: 'Method not allowed' })
 }

@@ -17,7 +17,7 @@ const neededs = [
   },
   {
     name: 'Botte de fer',
-    image: 'rond-a-fer.jpg',
+    image: 'botte-de-fer.jpg',
     goal: 150000,
     reached: 5000
   },
