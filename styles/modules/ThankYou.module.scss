@@ -1,0 +1,37 @@
+.container {
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+.btn {
+  font-family: 'Poppins';
+  font-weight: 500;
+  box-shadow: unset;
+  border-radius: unset;
+  background-color: var(--primary);
+}
+
+.heroBanner {
+  background: url('/hero.jpg');
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--white);
+    background: var(--primary-opacity);
+
+    height: 250px;
+    padding: 30px;
+
+    h1 {
+      margin-top: 80px;
+      font-size: 30px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.main {}

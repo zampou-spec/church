@@ -1,28 +1,16 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import JSConfetti from 'js-confetti'
-
-import {
-  Card,
-  Grid,
-  Modal,
-  Button,
-  CardMedia,
-  TextField,
-  Typography,
-  CardContent,
-  CardActions,
-  InputAdornment,
-} from '@mui/material'
-import * as Yup from 'yup'
-import { Autoplay } from 'swiper'
-import { useFormik } from 'formik'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import LoadingButton from '@mui/lab/LoadingButton'
-
 import styles from '../styles/modules/Home.module.scss'
 import 'swiper/css'
+
+import * as Yup from 'yup'
+import Head from 'next/head'
+import Image from 'next/image'
+import { useState } from 'react'
+import { Autoplay } from 'swiper'
+import { useFormik } from 'formik'
+import JSConfetti from 'js-confetti'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { Card, Grid, Modal, Button, CardMedia, TextField, Typography, CardContent, CardActions, InputAdornment } from '@mui/material'
 
 export default function Home() {
   const [open, setOpen] = useState(false)
@@ -31,7 +19,7 @@ export default function Home() {
     initialValues: {
       first_name: '',
       last_name: '',
-      amount: 200
+      amount: 0
     },
     validationSchema: Yup.object({
       first_name: Yup
@@ -45,7 +33,8 @@ export default function Home() {
       amount: Yup
         .number()
         .integer()
-        .min(200, 'Montant mininum est de 200 FCFA')
+        .min(100, 'Le montant minimum est de 100 FCFA')
+        .max(1500000, 'Le montant maximum est de 1500000 FCFA')
         .required('Ce champ est requis')
     }),
     onSubmit: async (values, helpers) => {
@@ -74,19 +63,15 @@ export default function Home() {
         customer_zip_code: '00225'
       })
 
-      CinetPay.waitResponse(function (data) {
+      CinetPay.waitResponse(async (data) => {
         if (data.status == "REFUSED") {
-          console.log('ok')
-
-          const jsConfetti = new JSConfetti()
-          jsConfetti.addConfetti()
-
-          return 'ok'
+          router.push('/thank-you?satus=fail')
         } else if (data.status == "ACCEPTED") {
-          console.log('no')
-          return 'no'
+          router.push(`/thank-you?satus=success&fullname=${values.first_name + ' ' + values.last_name}`)
         }
       })
+
+      helpers.resetForm()
     }
   })
 
