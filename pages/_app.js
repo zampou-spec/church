@@ -11,8 +11,8 @@ export default function App({ Component, pageProps }) {
 
   useEffect(() => {
     CinetPay.setConfig({
-      apikey: '12912847765bc0db748fdd44.40081707',
-      site_id: 445160,
+      apikey: '10651789036408d619c77ce3.80988192',
+      site_id: 630620,
       notify_url: ''
     })
   })
