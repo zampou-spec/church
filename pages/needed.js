@@ -1,7 +1,6 @@
 import styles from '../styles/modules/Needed.module.scss'
 
 import useSWR from 'swr'
-// import axios from 'axios'
 import * as Yup from 'yup'
 import Head from 'next/head'
 import Image from 'next/image'
