@@ -104,16 +104,7 @@ export default function Home() {
             </div>
             <div className={styles.textContent}>
               <p>
-                La création d’une paroisse, si elle répond à un besoin d’ordre pastoral,
-                celui de rapprocher davantage l’église de ses fidèles, nécessite au préalable
-                que l’on puisse avoir les infrastructures humaines et matérielles capables de
-                permettre le bon fonctionnement de cette paroisse. C'est dans cette optique
-                que la nouvelle paroisse Notre-Dame de Cana de Jean folly belle-ville organise
-                sa 2e édition de La fête de Charité du 15 janvier au 15 mars 2023. En organisant
-                cette fête qui a  pour objectif de recueillir des fonds pour la construction de
-                la paroisse, l'administrateur général et la communauté paroissiale exhortent les
-                fidèles et les personnes de bonne volonté à participer à travers des dons en nature
-                ou en espèces.
+                La création d’une paroisse, si elle répond à un besoin d’ordre pastoral, celui de rapprocher davantage l’église de ses fidèles, nécessite au préalable que l’on puisse avoir les infrastructures humaines et matérielles capables de permettre le bon fonctionnement de cette paroisse. C'est dans cette optique que la nouvelle paroisse Notre-Dame de Cana de Jean folly belle-ville organise sa 2e édition de La fête de Charité du 11 Mars au 16 Avril 2023. En organisant cette fête qui a pour objectif de recueillir des fonds pour la construction de la paroisse, le curé et la communauté paroissiale exhortent les fidèles et les personnes de bonne volonté à y participer à travers des dons en nature ou en espèces.
               </p>
             </div>
           </div>
@@ -140,8 +131,7 @@ export default function Home() {
             <div className={styles.item}>
               <div className={`${styles.content} gg`}>
                 <p>
-                  Decider de combler par votre contribuer un besoin en matériels de construction.
-                  Consulter notre liste de besoin fixe, offrez ou payez pour la construction de l'église.
+                  Decider de combler par votre contribution un besoin en matériels de construction. Consulter notre liste de besoin fixe, offrez ou payez pour la construction de l'église.
                 </p>
                 <Button variant="contained" href='/needed' size='large' className={styles.btn}>Combler un besoin</Button>
               </div>

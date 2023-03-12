@@ -163,7 +163,7 @@ export default function Home() {
           <div className={styles.container}>
             <Paper elevation={3} className={styles.paper}>
               <p>
-                Nous avons listé nos besoins en matériels sur cette plateforme pour permettre aux personnes de bonne volonté de nous aider. Vous pouvez selon l'objectif, decider d'offrir du matériel directement à la paroisse en prenant rendez-vous ou decider de payer une somme pour combler l'un des besoins lister ici.
+                Nous avons listé nos besoins en matériels sur cette plateforme pour permettre aux personnes de bonne volonté de nous aider. Vous pouvez selon l'objectif, decider d'offrir du matériel directement à la paroisse en prenant rendez-vous ou decider de payer une somme pour combler l'un des besoins listés ici.
               </p>
             </Paper>
           </div>
