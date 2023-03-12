@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 import Particles from 'react-particles'
 import { loadFull } from 'tsparticles'
 import { useEffect, useCallback } from 'react'
-import { useSelect } from '@mui/base'
 
 export default function ThankYou() {
   const { query } = useRouter()

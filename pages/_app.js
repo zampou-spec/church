@@ -1,9 +1,7 @@
 import '../styles/globals.scss'
 
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-import Script from 'next/script'
 import { useEffect } from 'react'
 import { Button } from '@mui/material'
 
