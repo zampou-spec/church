@@ -1,25 +1,26 @@
 import styles from '../styles/modules/Needed.module.scss'
 
 import useSWR from 'swr'
-import axios from 'axios'
+// import axios from 'axios'
 import * as Yup from 'yup'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
+import { httpClient } from '../utils/Api'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { Tab, Box, Grid, Card, Modal, Paper, Button, Skeleton, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
 
-const getNeeded = async () => axios.get('/api/needed').then((res) => res.data).catch(console.log)
+const getNeeded = async () => httpClient.get('needed').then((res) => res.data).catch(console.log)
 
 export default function Home() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
   const [panel, setPanel] = useState('1')
 
-  const { data: neededs, isLoading, mutate } = useSWR('/api/needed', getNeeded)
+  const { data: neededs, isLoading, mutate } = useSWR('/needed', getNeeded)
 
   const formikMoney = useFormik({
     initialValues: {
@@ -76,8 +77,8 @@ export default function Home() {
         if (data.status == 'REFUSED') {
           router.push('/thank-you?status=fail')
         } else if (data.status == 'ACCEPTED') {
-          await axios
-            .post('/api/needed', { needed_id: values.need_id, amount: values.amount })
+          await httpClient
+            .post(`needed/${values.need_id}`, { amount: values.amount })
             .then(() => {
               mutate()
               const fullname = values.first_name + ' ' + values.last_name
@@ -114,8 +115,8 @@ export default function Home() {
     onSubmit: async (values, helpers) => {
       setOpen(false)
 
-      await axios
-        .post('/api/send-contact-mail', values)
+      await httpClient
+        .post('send-contact-mail', values)
         .then(() => {
           const fullname = values.first_name + ' ' + values.last_name
           router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
