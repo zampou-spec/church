@@ -115,8 +115,7 @@ export default function Home() {
         .required('Ce champ est requis'),
     }),
     onSubmit: async (values, helpers) => {
-      console.log(values);
-      return
+
       setOpen(false)
 
       await httpClient
