@@ -5,18 +5,20 @@ import Image from 'next/image'
 import JSConfetti from 'js-confetti'
 import { useRouter } from 'next/router'
 
-import Particles from 'react-particles'
 import { loadFull } from 'tsparticles'
+import { Button } from '@mui/material'
+import Particles from 'react-particles'
 import { useEffect, useCallback } from 'react'
 
+
 export default function ThankYou() {
-  const { query } = useRouter()
+  const { query, back } = useRouter()
 
   const customInit = useCallback(async (engine) => {
     await loadFull(engine)
   })
 
-  const color = query.status == 'success' ? ['#0aff3f', '#47ff5f', '#72ff70', '#85ffb6', '#b1fbb6', '#bef9c5'] : ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7'] 
+  const color = query.status == 'success' ? ['#0aff3f', '#47ff5f', '#72ff70', '#85ffb6', '#b1fbb6', '#bef9c5'] : ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd', '#f9bec7']
 
   const options = {
     "fullScreen": {
@@ -122,7 +124,7 @@ export default function ThankYou() {
 
   useEffect(() => {
     const jsConfetti = new JSConfetti()
-    jsConfetti.addConfetti({confettiColors: color})
+    jsConfetti.addConfetti({ confettiColors: color })
   })
 
   return (
@@ -136,15 +138,18 @@ export default function ThankYou() {
 
       <Particles options={options} init={customInit} />
 
-      <section className={styles.heroBanner} style={{ background: query.status =='success' ? '#198754' : '#dc3545' }}>
+      <section className={styles.heroBanner} style={{ background: query.status == 'success' ? '#198754' : '#dc3545' }}>
         <div className={styles.content}>
           {query.status == 'success' ?
             <div className={styles.textContent}>
-                <h1>Felicitation</h1>
-                <h5>{ query.fullname }</h5>
-              </div>
+              <h1>Felicitation</h1>
+              <h5>{query.fullname}</h5>
+            </div>
             : <h1>Ooops erruer</h1>
           }
+          <div style={{ marginTop: '20px' }}>
+            <Button variant="contained" size='large' className='btn' onClick={() => back()}>REVENIRE EN ARRIERE</Button>
+          </div>
         </div>
       </section>
 
@@ -158,9 +163,9 @@ export default function ThankYou() {
               }
             </div>
             <div className={styles.imageContent}>
-              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
-              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
-              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} />
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} priority />
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} priority />
+              <Image src={query.status == 'success' ? '/success.jpg' : '/fail.jpg'} alt='slider' width={600} height={456} priority />
             </div>
           </div>
         </section>

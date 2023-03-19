@@ -13,9 +13,9 @@ import PhoneInput from 'react-phone-input-2'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { Tab, Box, Grid, Card, Modal, Paper, Button, Skeleton, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
-import { borderColor } from '@mui/system'
 
 const getNeeded = async () => httpClient.get('needed').then((res) => res.data).catch(console.log)
+const formatter = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'XOF', maximumFractionDigits: 3 });
 
 export default function Home() {
   const router = useRouter()
@@ -51,6 +51,7 @@ export default function Home() {
         .required('Ce champ est requis'),
     }),
     onSubmit: async (values, helpers) => {
+      setPanel('1')
       setOpen(false)
 
       CinetPay.getCheckout({
@@ -91,6 +92,7 @@ export default function Home() {
       })
 
       helpers.resetForm()
+      formikMaterial.resetForm()
     }
   })
 
@@ -115,18 +117,17 @@ export default function Home() {
         .required('Ce champ est requis'),
     }),
     onSubmit: async (values, helpers) => {
-
-      setOpen(false)
-
       await httpClient
         .post('send-mail-needed', values)
         .then(() => {
+          setPanel('1')
+          setOpen(false)
+          helpers.resetForm()
+          formikMoney.resetForm()
           const fullname = values.first_name + ' ' + values.last_name
           router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
         })
         .catch(console.error)
-
-      helpers.resetForm()
     }
   })
 
@@ -214,7 +215,7 @@ export default function Home() {
                             Atteint:
                           </Typography>
                           <Typography gutterBottom className={styles.value}>
-                            {needed.reached} FCFA
+                            {formatter.format(needed.reached)}
                           </Typography>
                         </div>
                         <LinearProgress variant="determinate" className={styles.progress} value={needed.percent} />
@@ -223,7 +224,7 @@ export default function Home() {
                             Objectif:
                           </Typography>
                           <Typography gutterBottom className={styles.value}>
-                            {needed.goal} FCFA
+                            {formatter.format(needed.goal)}
                           </Typography>
                         </div>
                       </div>
@@ -259,7 +260,7 @@ export default function Home() {
                 <CardMedia
                   sx={{ height: 200 }}
                   image='/form.jpg'
-                  title='form'
+                  title='Contribution en espece'
                 />
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='div' className={styles.title} style={{ textAlign: 'center' }}>
@@ -336,7 +337,7 @@ export default function Home() {
                 <CardMedia
                   sx={{ height: 200 }}
                   image='/sliders/7.jpg'
-                  title='green iguana'
+                  title='Contribution materiel'
                 />
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='div' className={styles.title} style={{ textAlign: 'center' }}>
@@ -391,11 +392,8 @@ export default function Home() {
                         onChange={(phone) => {
                           formikMaterial.setFieldValue('phone', phone)
                         }}
-                        priority={{ci: 1}}
                       />
-                      { 
-                        (formikMaterial.touched.phone && formikMaterial.errors.phone) && <p className={styles.formHelpers}>{formikMaterial.touched.phone && formikMaterial.errors.phone}</p>                         
-                        }
+                      {(formikMaterial.touched.phone && formikMaterial.errors.phone) && <p className={styles.formHelpers}>{formikMaterial.touched.phone && formikMaterial.errors.phone}</p>}
                     </Grid>
                   </Grid>
                 </CardContent>

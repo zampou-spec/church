@@ -16,7 +16,7 @@ export default function Home() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  const formik = useFormik({
+  const formikMoney = useFormik({
     initialValues: {
       first_name: '',
       last_name: '',
@@ -84,7 +84,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>EGLISE CATHOLIQUE NOTE DAME DE CANA</title>
+        <title>EGLISE CATHOLIQUE NOTE DAME DE CANA - ACCEUIL</title>
         <meta name="description" content="EGLISE CATHOLIQUE NOTE DAME DE CANA" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -201,14 +201,14 @@ export default function Home() {
         className='containerPaymentModal'
       >
         <Card className='paymentModal'>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formikMoney.handleSubmit}>
             <div className='closeModal' onClick={handleClose}>
               <Image src={'/close.svg'} alt='close' width={500} height={500} />
             </div>
             <CardMedia
               sx={{ height: 200 }}
               image='/form.jpg'
-              title='green iguana'
+              title='Faire un don'
             />
             <CardContent>
               <Typography gutterBottom variant='h4' component='div' className={styles.title} style={{ textAlign: 'center' }}>
@@ -223,11 +223,11 @@ export default function Home() {
                     size='small'
                     name='first_name'
                     variant='outlined'
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    value={formik.values.first_name}
-                    helperText={formik.touched.first_name && formik.errors.first_name}
-                    error={Boolean(formik.touched.first_name && formik.errors.first_name)}
+                    onBlur={formikMoney.handleBlur}
+                    onChange={formikMoney.handleChange}
+                    value={formikMoney.values.first_name}
+                    helperText={formikMoney.touched.first_name && formikMoney.errors.first_name}
+                    error={Boolean(formikMoney.touched.first_name && formikMoney.errors.first_name)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -237,11 +237,11 @@ export default function Home() {
                     name='last_name'
                     label='Prenom(s)'
                     variant='outlined'
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    value={formik.values.last_name}
-                    helperText={formik.touched.last_name && formik.errors.last_name}
-                    error={Boolean(formik.touched.last_name && formik.errors.last_name)}
+                    onBlur={formikMoney.handleBlur}
+                    onChange={formikMoney.handleChange}
+                    value={formikMoney.values.last_name}
+                    helperText={formikMoney.touched.last_name && formikMoney.errors.last_name}
+                    error={Boolean(formikMoney.touched.last_name && formikMoney.errors.last_name)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -252,11 +252,11 @@ export default function Home() {
                     name='amount'
                     label='Montant'
                     variant='outlined'
-                    onBlur={formik.handleBlur}
-                    onChange={formik.handleChange}
-                    value={formik.values.amount}
-                    helperText={formik.touched.amount && formik.errors.amount}
-                    error={Boolean(formik.touched.amount && formik.errors.amount)}
+                    onBlur={formikMoney.handleBlur}
+                    onChange={formikMoney.handleChange}
+                    value={formikMoney.values.amount}
+                    helperText={formikMoney.touched.amount && formikMoney.errors.amount}
+                    error={Boolean(formikMoney.touched.amount && formikMoney.errors.amount)}
                     InputProps={{
                       endAdornment: <InputAdornment position='end'>FCFA</InputAdornment>,
                     }}
@@ -271,7 +271,7 @@ export default function Home() {
                 type='submit'
                 className='btn'
                 variant='contained'
-                loading={formik.isSubmitting}
+                loading={formikMoney.isSubmitting}
                 loadingIndicator='Patientez...'
               >Payez</LoadingButton>
             </CardActions>

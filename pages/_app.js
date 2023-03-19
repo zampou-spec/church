@@ -7,16 +7,20 @@ import * as Yup from 'yup'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useFormik } from 'formik'
+import { useRouter } from 'next/router'
+import { httpClient } from '../utils/Api'
 import { useEffect, useState } from 'react'
 import PhoneInput from 'react-phone-input-2'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { Card, Grid, Modal, Button, CardMedia, TextField, Typography, CardContent, CardActions } from '@mui/material'
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
 
   const handleClose = () => {
     setOpen(false)
+    formikContact.resetForm()
   }
 
   useEffect(() => {
@@ -26,7 +30,6 @@ export default function App({ Component, pageProps }) {
       notify_url: ''
     })
   })
-
 
   const formikContact = useFormik({
     initialValues: {
@@ -48,24 +51,20 @@ export default function App({ Component, pageProps }) {
         .string()
         .max(255)
         .required('Ce champ est requis'),
-      phone: Yup
+      message: Yup
         .string()
         .required('Ce champ est requis'),
     }),
     onSubmit: async (values, helpers) => {
-      console.log(values);
-      return
-      setOpen(false)
-
       await httpClient
-        .post('send-mail-needed', values)
+        .post('send-mail-contact', values)
         .then(() => {
+          setOpen(false)
+          helpers.resetForm()
           const fullname = values.first_name + ' ' + values.last_name
           router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
         })
         .catch(console.error)
-
-      helpers.resetForm()
     }
   })
 
@@ -77,7 +76,7 @@ export default function App({ Component, pageProps }) {
         <Link href='/'>
           <Image src={'/logo.png'} alt='logo' className='logo' width={500} height={500} />
         </Link>
-        <Button variant="contained" size='large' className='btn'>Contactez-nous</Button>
+        <Button variant="contained" size='large' className='btn' onClick={() => setOpen(true)}>Contactez-nous</Button>
       </nav>
     </header>
 
@@ -120,11 +119,11 @@ export default function App({ Component, pageProps }) {
             <CardMedia
               sx={{ height: 200 }}
               image='/sliders/7.jpg'
-              title='green iguana'
+              title='Contactez-nous'
             />
             <CardContent>
               <Typography gutterBottom variant='h5' component='div' style={{ textAlign: 'center' }}>
-                  CONTACTEZ-NOUS
+                CONTACTEZ-NOUS
               </Typography>
 
               <Grid container spacing={2} alignItems='center' justifyContent='center' >
@@ -135,6 +134,11 @@ export default function App({ Component, pageProps }) {
                     size='small'
                     name='first_name'
                     variant='outlined'
+                    onBlur={formikContact.handleBlur}
+                    onChange={formikContact.handleChange}
+                    value={formikContact.values.first_name}
+                    helperText={formikContact.touched.first_name && formikContact.errors.first_name}
+                    error={Boolean(formikContact.touched.first_name && formikContact.errors.first_name)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -144,7 +148,11 @@ export default function App({ Component, pageProps }) {
                     name='last_name'
                     label='Prenom(s)'
                     variant='outlined'
-                    
+                    onBlur={formikContact.handleBlur}
+                    onChange={formikContact.handleChange}
+                    value={formikContact.values.last_name}
+                    helperText={formikContact.touched.last_name && formikContact.errors.last_name}
+                    error={Boolean(formikContact.touched.last_name && formikContact.errors.last_name)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -154,15 +162,19 @@ export default function App({ Component, pageProps }) {
                     }}
                     inputClass={styles.phoneInput}
                     inputStyle={{
-                      '--box-shadow-focus': true ? '#d32f2f' : 'var(--primary)',
-                      '--border-color-hover': true ? '#d32f2f' : null,
-                      '--border-color-focus': true ? '#d32f2f' : 'var(--primary)'
+                      '--box-shadow-focus': (formikContact.touched.phone && formikContact.errors.phone) ? '#d32f2f' : 'var(--primary)',
+                      '--border-color-hover': (formikContact.touched.phone && formikContact.errors.phone) ? '#d32f2f' : null,
+                      '--border-color-focus': (formikContact.touched.phone && formikContact.errors.phone) ? '#d32f2f' : 'var(--primary)'
                     }}
-                    specialLabel='Numéro de téléphone'
+                    onBlur={formikContact.handleBlur}
+                    value={formikContact.values.phone}
                     country={'ci'}
                     masks={{ ci: '.. .. .. .. ..' }}
-                    priority={{ ci: 1 }}
+                    onChange={(phone) => {
+                      formikContact.setFieldValue('phone', phone)
+                    }}
                   />
+                  {(formikContact.touched.phone && formikContact.errors.phone) && <p className={styles.formHelpers}>{formikContact.touched.phone && formikContact.errors.phone}</p>}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -173,6 +185,12 @@ export default function App({ Component, pageProps }) {
                     label='Message'
                     variant='outlined'
                     rows={4}
+
+                    onBlur={formikContact.handleBlur}
+                    onChange={formikContact.handleChange}
+                    value={formikContact.values.message}
+                    helperText={formikContact.touched.message && formikContact.errors.message}
+                    error={Boolean(formikContact.touched.message && formikContact.errors.message)}
                   />
                 </Grid>
               </Grid>
@@ -185,6 +203,7 @@ export default function App({ Component, pageProps }) {
                 className='btn'
                 variant='contained'
                 loadingIndicator='Patientez...'
+                loading={formikContact.isSubmitting}
               >Envoyez</LoadingButton>
             </CardActions>
           </form>
