@@ -212,7 +212,7 @@ export default function Home() {
             />
             <CardContent>
               <Typography gutterBottom variant='h4' component='div' className={styles.title} style={{ textAlign: 'center' }}>
-                Faire un don
+                FAIRE UN DON
               </Typography>
 
               <Grid container spacing={2} alignItems='center' justifyContent='center' >

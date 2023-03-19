@@ -1,4 +1,5 @@
 import styles from '../styles/modules/Needed.module.scss'
+import 'react-phone-input-2/lib/material.css'
 
 import useSWR from 'swr'
 import * as Yup from 'yup'
@@ -8,9 +9,11 @@ import { useState } from 'react'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { httpClient } from '../utils/Api'
+import PhoneInput from 'react-phone-input-2'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { TabList, TabPanel, TabContext } from '@mui/lab'
 import { Tab, Box, Grid, Card, Modal, Paper, Button, Skeleton, CardMedia, TextField, Typography, CardContent, CardActions, LinearProgress, InputAdornment } from '@mui/material'
+import { borderColor } from '@mui/system'
 
 const getNeeded = async () => httpClient.get('needed').then((res) => res.data).catch(console.log)
 
@@ -112,10 +115,12 @@ export default function Home() {
         .required('Ce champ est requis'),
     }),
     onSubmit: async (values, helpers) => {
+      console.log(values);
+      return
       setOpen(false)
 
       await httpClient
-        .post('send-contact-mail', values)
+        .post('send-mail-needed', values)
         .then(() => {
           const fullname = values.first_name + ' ' + values.last_name
           router.push(`/thank-you?status=success&fullname=${fullname.toUpperCase()}`)
@@ -133,10 +138,11 @@ export default function Home() {
     formikMaterial.resetForm()
   }
 
-  const handleOpen = (needed_id) => {
+  const handleOpen = (needed_id, needed_name) => {
     setOpen(true)
     formikMoney.setFieldValue('need_id', needed_id)
     formikMaterial.setFieldValue('need_id', needed_id)
+    formikMaterial.setFieldValue('need_name', needed_name)
   }
 
   const handlePanel = (event, newValue) => {
@@ -225,7 +231,7 @@ export default function Home() {
                     </div>
                   </CardContent>
                   <CardActions>
-                    <Button variant="contained" onClick={() => handleOpen(needed.id)} size='large' fullWidth className='btn'>Contribuer</Button>
+                    <Button variant="contained" onClick={() => handleOpen(needed.id, needed.name)} size='large' fullWidth className='btn'>Contribuer</Button>
                   </CardActions>
                 </Card>
               )}
@@ -254,7 +260,7 @@ export default function Home() {
                 <CardMedia
                   sx={{ height: 200 }}
                   image='/form.jpg'
-                  title='green iguana'
+                  title='form'
                 />
                 <CardContent>
                   <Typography gutterBottom variant='h5' component='div' className={styles.title} style={{ textAlign: 'center' }}>
@@ -368,18 +374,29 @@ export default function Home() {
                       />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        size='small'
-                        name='phone'
-                        label='Numéro de téléphone'
-                        variant='outlined'
+                      <PhoneInput
+                        inputProps={{
+                          name: 'phone'
+                        }}
+                        specialLabel='Numéro de téléphone'
+                        inputClass={styles.phoneInput}
+                        inputStyle={{
+                          '--box-shadow-focus': (formikMaterial.touched.phone && formikMaterial.errors.phone) ? '#d32f2f' : 'var(--primary)',
+                          '--border-color-hover': (formikMaterial.touched.phone && formikMaterial.errors.phone) ? '#d32f2f' : null,
+                          '--border-color-focus': (formikMaterial.touched.phone && formikMaterial.errors.phone) ? '#d32f2f' : 'var(--primary)'
+                        }}
                         onBlur={formikMaterial.handleBlur}
-                        onChange={formikMaterial.handleChange}
                         value={formikMaterial.values.phone}
-                        helperText={formikMaterial.touched.phone && formikMaterial.errors.phone}
-                        error={Boolean(formikMaterial.touched.phone && formikMaterial.errors.phone)}
+                        country={'ci'}
+                        masks={{ ci: '.. .. .. .. ..' }}
+                        onChange={(phone) => {
+                          formikMaterial.setFieldValue('phone', phone)
+                        }}
+                        priority={{ci: 1}}
                       />
+                      { 
+                        (formikMaterial.touched.phone && formikMaterial.errors.phone) && <p className={styles.formHelpers}>{formikMaterial.touched.phone && formikMaterial.errors.phone}</p>                         
+                        }
                     </Grid>
                   </Grid>
                 </CardContent>
@@ -392,7 +409,7 @@ export default function Home() {
                     variant='contained'
                     loading={formikMaterial.isSubmitting}
                     loadingIndicator='Patientez...'
-                  >Payez</LoadingButton>
+                  >Envoyez</LoadingButton>
                 </CardActions>
               </form>
             </TabPanel>
